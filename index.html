@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Tushar Dhere – Storage & Backup Administrator based in Airoli, Navi Mumbai. Expert in HP Data Protector, HPE Primera, Cisco SAN.">
+  <meta name="theme-color" content="#010101">
+  <title>Tushar Dhere – Storage &amp; Backup Administrator</title>
+
+  <!-- Google Fonts — preconnect for faster load -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Portfolio Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- EmailJS (must load before app.js uses it) -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════════════════
+       CANVAS BACKGROUND LAYERS
+       z-index 1: flower, 2: particles, 3: cursor glow
+  ═══════════════════════════════════════════════════════════ -->
+  <canvas id="flower-canvas"    aria-hidden="true"></canvas>
+  <canvas id="particles-canvas" aria-hidden="true"></canvas>
+  <div    id="cursor-glow"      aria-hidden="true"></div>
+
+  <!-- ══════════════════════════════════════════════════════
+       SCROLL PROGRESS DOTS  (desktop, right edge)
+  ═══════════════════════════════════════════════════════════ -->
+  <nav id="scroll-progress" aria-label="Page sections">
+    <div class="progress-dot active" data-tab="about"     title="About"></div>
+    <div class="progress-dot"        data-tab="resume"    title="Resume"></div>
+    <div class="progress-dot"        data-tab="portfolio" title="Portfolio"></div>
+    <div class="progress-dot"        data-tab="contact"   title="Contact"></div>
+  </nav>
+
+  <!-- ══════════════════════════════════════════════════════
+       MOBILE TOP BAR
+  ═══════════════════════════════════════════════════════════ -->
+  <header class="mobile-topbar" role="banner">
+    <div class="mobile-profile">
+      <div class="mob-avatar" aria-hidden="true">TD</div>
+      <div>
+        <span class="mob-name">Tushar Dhere</span>
+        <span class="mob-role">Storage &amp; Backup Admin</span>
+      </div>
+    </div>
+    <div class="mob-right">
+      <span class="mob-tab-label" id="mobTabLabel">About</span>
+      <button class="hamburger" id="hamburger" aria-label="Open navigation" aria-expanded="false">
+        <i class="fa fa-bars" aria-hidden="true"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- ══════════════════════════════════════════════════════
+       SIDEBAR OVERLAY
+       Sibling of .sidebar — z-index 299 (< sidebar 300)
+       Overlay NEVER wraps the sidebar in the DOM.
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="sidebar-overlay" id="sidebarOverlay" aria-hidden="true"></div>
+
+  <!-- ══════════════════════════════════════════════════════
+       PAGE LAYOUT
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="layout">
+
+    <!-- ════════════ SIDEBAR ════════════ -->
+    <aside class="sidebar" id="sidebar" aria-label="Profile sidebar">
+
+      <!-- Close button (mobile only) -->
+      <button class="sidebar-close" id="sidebarClose" aria-label="Close sidebar">
+        <i class="fa fa-xmark" aria-hidden="true"></i>
+      </button>
+
+      <div class="sidebar-inner">
+
+        <!-- Avatar + Open to Work badge -->
+        <div class="avatar-wrap">
+          <div class="avatar-ring" aria-hidden="true">
+            <div class="avatar-placeholder">TD</div>
+          </div>
+          <div class="otw-badge" title="Open to Work"></div>
+        </div>
+
+        <h1 class="sidebar-name">Tushar Dhere</h1>
+        <span class="role-badge">Storage &amp; Backup Administrator</span>
+
+        <div class="sidebar-divider"></div>
+
+        <!-- Contact list -->
+        <ul class="contact-list" aria-label="Contact information">
+
+          <!-- Email with copy-to-clipboard -->
+          <li>
+            <span class="contact-icon" aria-hidden="true"><i class="fa fa-envelope"></i></span>
+            <div style="min-width:0;flex:1">
+              <small>EMAIL</small>
+              <div class="copy-row" id="copyRow" title="Click to copy email address" role="button" tabindex="0">
+                <p style="word-break:break-all;font-size:.7rem;color:#c1c9d4">
+                  work.tushardhere@gmail.com
+                </p>
+                <button class="copy-icon-btn" id="copyBtn" aria-label="Copy email address">
+                  <i class="fa fa-copy" aria-hidden="true"></i>
+                </button>
+              </div>
+              <span class="copy-confirm" id="copyConfirm" aria-live="polite">Copied!</span>
+            </div>
+          </li>
+
+          <!-- Phone -->
+          <li>
+            <span class="contact-icon" aria-hidden="true"><i class="fa fa-phone"></i></span>
+            <div>
+              <small>PHONE</small>
+              <p><a href="tel:+917261965093">+91 7261965093</a></p>
+            </div>
+          </li>
+
+          <!-- WhatsApp -->
+          <li>
+            <span class="contact-icon wa" aria-hidden="true"><i class="fab fa-whatsapp"></i></span>
+            <div>
+              <small>WHATSAPP</small>
+              <p><a href="https://wa.me/917261965093" target="_blank" rel="noopener">+91 7261965093</a></p>
+            </div>
+          </li>
+
+          <!-- Experience since -->
+          <li>
+            <span class="contact-icon" aria-hidden="true"><i class="fa fa-calendar-days"></i></span>
+            <div>
+              <small>EXPERIENCE SINCE</small>
+              <p>Sep 2024</p>
+            </div>
+          </li>
+
+          <!-- Location -->
+          <li>
+            <span class="contact-icon" aria-hidden="true"><i class="fa fa-location-dot"></i></span>
+            <div>
+              <small>LOCATION</small>
+              <p>Airoli, Navi Mumbai, India</p>
+            </div>
+          </li>
+
+        </ul><!-- /contact-list -->
+
+        <div class="sidebar-divider"></div>
+
+        <!-- Social icon buttons -->
+        <div class="social-links" aria-label="Social links">
+          <a href="https://linkedin.com/in/tushar-dhere" target="_blank" rel="noopener"
+             class="social-btn" aria-label="LinkedIn">
+            <i class="fab fa-linkedin-in" aria-hidden="true"></i>
+          </a>
+          <a href="https://github.com/TusharDhere" target="_blank" rel="noopener"
+             class="social-btn" aria-label="GitHub">
+            <i class="fab fa-github" aria-hidden="true"></i>
+          </a>
+          <a href="https://wa.me/917261965093" target="_blank" rel="noopener"
+             class="social-btn wa" aria-label="WhatsApp">
+            <i class="fab fa-whatsapp" aria-hidden="true"></i>
+          </a>
+          <a href="mailto:work.tushardhere@gmail.com"
+             class="social-btn" aria-label="Email">
+            <i class="fa fa-envelope" aria-hidden="true"></i>
+          </a>
+        </div>
+
+        <div class="sidebar-divider"></div>
+
+        <!-- Download Resume -->
+        <a href="Tushar_Dhere_Resume.pdf" download="Tushar_Dhere_Resume.pdf"
+           class="download-cv-btn">
+          <i class="fa fa-file-arrow-down" aria-hidden="true"></i>
+          Download Resume
+        </a>
+
+      </div><!-- /sidebar-inner -->
+    </aside><!-- /sidebar -->
+
+    <!-- ════════════ MAIN CONTENT ════════════ -->
+    <main class="main-content" id="mainContent">
+
+      <!-- Tab navigation -->
+      <nav class="tab-nav" id="tabNav" aria-label="Portfolio sections">
+        <button class="tab-btn active" data-tab="about"     aria-selected="true">About</button>
+        <button class="tab-btn"        data-tab="resume"    aria-selected="false">Resume</button>
+        <button class="tab-btn"        data-tab="portfolio" aria-selected="false">Portfolio</button>
+        <button class="tab-btn"        data-tab="contact"   aria-selected="false">Contact</button>
+      </nav>
+
+      <!-- ═══════════════ ABOUT ═══════════════ -->
+      <section class="tab-panel active" id="about" role="tabpanel" aria-label="About">
+
+        <div class="section-header">
+          <h2>About Me</h2>
+          <span class="accent-line"></span>
+        </div>
+
+        <div class="about-text">
+          <p>Storage &amp; Backup Administrator with hands-on experience in enterprise data protection,
+             SAN, and storage operations within 24×7 production data center environments. Proficient
+             in HP Data Protector, HPE Primera A650, MSA storage, and Cisco SAN switches.</p>
+          <p>Strong expertise in backup monitoring, restore operations, incident management, root cause
+             analysis, and SLA compliance. Experienced in coordinating with OEM vendors (HPE &amp;
+             OpenText) to ensure high availability, data reliability, and disaster recovery readiness
+             across critical insurance infrastructure.</p>
+        </div>
+
+        <!-- What I'm Doing — 6 service cards -->
+        <h3 class="sub-heading" style="margin-top:2rem">What I'm Doing</h3>
+        <div class="services-grid">
+
+          <div class="service-card">
+            <div class="service-icon"><i class="fa fa-database" aria-hidden="true"></i></div>
+            <div>
+              <h4>Backup Administration</h4>
+              <p>HP Data Protector backup &amp; restore operations, policy configuration,
+                 media pool management in 24×7 production environments.</p>
+            </div>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon"><i class="fa fa-server" aria-hidden="true"></i></div>
+            <div>
+              <h4>Storage Management</h4>
+              <p>HPE Primera A650 &amp; MSA 2050 — CPGs, LUNs, hosts, hostsets,
+                 provisioning &amp; performance monitoring.</p>
+            </div>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon"><i class="fa fa-network-wired" aria-hidden="true"></i></div>
+            <div>
+              <h4>SAN Administration</h4>
+              <p>Cisco SAN switch management — zoning, zonesets, HBA troubleshooting
+                 and path management for enterprise fabrics.</p>
+            </div>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon"><i class="fa fa-shield-halved" aria-hidden="true"></i></div>
+            <div>
+              <h4>Disaster Recovery</h4>
+              <p>Incident management, RCA, SLA compliance, and coordinating with
+                 HPE &amp; OpenText OEM teams for DR readiness.</p>
+            </div>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon"><i class="fa fa-code" aria-hidden="true"></i></div>
+            <div>
+              <h4>Scripting &amp; Automation</h4>
+              <p>Python &amp; Java scripting, Docker containerization, Git version control,
+                 and AWS cloud basics for automation workflows.</p>
+            </div>
+          </div>
+
+          <div class="service-card">
+            <div class="service-icon"><i class="fa fa-magnifying-glass-chart" aria-hidden="true"></i></div>
+            <div>
+              <h4>Health Monitoring</h4>
+              <p>Daily hardware health checks, reporting, tape library management,
+                 firmware upgrades, and break-fix support.</p>
+            </div>
+          </div>
+
+        </div><!-- /services-grid -->
+
+        <!-- Certifications -->
+        <h3 class="sub-heading">Certifications</h3>
+        <div class="cert-grid">
+          <div class="cert-card">
+            <i class="fab fa-aws cert-ico" aria-hidden="true"></i>
+            <span>AWS Beginner</span>
+            <small>Edureka</small>
+          </div>
+          <div class="cert-card">
+            <i class="fa fa-infinity cert-ico" aria-hidden="true"></i>
+            <span>DevOps Beginner</span>
+            <small>Edureka</small>
+          </div>
+          <div class="cert-card">
+            <i class="fa fa-lock cert-ico" aria-hidden="true"></i>
+            <span>Cyber Security</span>
+            <small>Google – Coursera</small>
+          </div>
+          <div class="cert-card">
+            <i class="fa fa-mug-hot cert-ico" aria-hidden="true"></i>
+            <span>Java &amp; Python</span>
+            <small>Seema Technologies</small>
+          </div>
+        </div>
+
+      </section><!-- /about -->
+
+      <!-- ═══════════════ RESUME ═══════════════ -->
+      <section class="tab-panel" id="resume" role="tabpanel" aria-label="Resume">
+
+        <div class="section-header resume-header-row">
+          <div>
+            <h2>Resume</h2>
+            <span class="accent-line"></span>
+          </div>
+          <a href="Tushar_Dhere_Resume.pdf" download class="download-cv-btn inline-dl">
+            <i class="fa fa-file-arrow-down" aria-hidden="true"></i> Download PDF
+          </a>
+        </div>
+
+        <!-- Education -->
+        <div class="resume-block">
+          <h3 class="resume-category">
+            <i class="fa fa-graduation-cap" aria-hidden="true"></i> Education
+          </h3>
+          <div class="timeline">
+
+            <div class="timeline-item">
+              <div class="timeline-dot gold"></div>
+              <div class="timeline-content">
+                <h4>B.E. in Information Technology</h4>
+                <span class="timeline-date">2020 – June 2024</span>
+                <p>MET Institute of Engineering, Nashik &nbsp;|&nbsp; <strong>CGPA: 8.39 / 10</strong></p>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content">
+                <h4>Higher Secondary Certificate (HSC)</h4>
+                <span class="timeline-date">March 2020</span>
+                <p>MG Junior College, Pravaranagar &nbsp;|&nbsp; <strong>57.85%</strong></p>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content">
+                <h4>Secondary School Certificate (SSC)</h4>
+                <span class="timeline-date">March 2018</span>
+                <p>New English School, Kolhar BK &nbsp;|&nbsp; <strong>81.00%</strong></p>
+              </div>
+            </div>
+
+          </div><!-- /timeline -->
+        </div><!-- /Education block -->
+
+        <!-- Experience -->
+        <div class="resume-block">
+          <h3 class="resume-category">
+            <i class="fa fa-briefcase" aria-hidden="true"></i> Experience
+          </h3>
+          <div class="timeline">
+
+            <div class="timeline-item">
+              <div class="timeline-dot gold"></div>
+              <div class="timeline-content">
+                <h4>Storage &amp; Backup Administrator</h4>
+                <span class="timeline-date">Sep 2024 – Present</span>
+                <p class="company">
+                  Informage Techno Solutions Pvt. Ltd.
+                  — <em>United India Insurance DC, Airoli</em>
+                </p>
+                <ul class="exp-list">
+                  <li>L1 &amp; L2 support for HP Data Protector backup &amp; restore in 24×7 production</li>
+                  <li>Monitored daily backup jobs, resolved failures &amp; long-running jobs to meet SLA</li>
+                  <li>Installed &amp; configured Cell Manager and client components on Linux &amp; Windows</li>
+                  <li>Administered HPE Primera A650 &amp; MSA 2050 — CPGs, LUNs, hosts, hostsets</li>
+                  <li>Managed Cisco SAN switches — zoning, zonesets, HBA/path troubleshooting</li>
+                  <li>Performed RCA for incidents; coordinated with HPE &amp; OpenText OEM teams</li>
+                  <li>Tape library expansions, firmware upgrades &amp; hardware replacement</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content">
+                <h4>Python Development Intern</h4>
+                <span class="timeline-date">Mar 2023 – Apr 2023</span>
+                <p class="company">Seema Technologies, Nashik</p>
+                <ul class="exp-list">
+                  <li>Developed customer registration portal in Python for managing user accounts</li>
+                  <li>Collaborative code reviews and feature development with team</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content">
+                <h4>Java Development Intern</h4>
+                <span class="timeline-date">Feb 2023 – Mar 2023</span>
+                <p class="company">Seema Technologies, Nashik</p>
+                <ul class="exp-list">
+                  <li>Built Customer Registration Portal using Java (Spring, Hibernate, Swing)</li>
+                  <li>Implemented database design and SQL connectivity in Java</li>
+                  <li>Applied OOP design principles throughout the project</li>
+                </ul>
+              </div>
+            </div>
+
+          </div><!-- /timeline -->
+        </div><!-- /Experience block -->
+
+        <!-- Skills -->
+        <div class="resume-block">
+          <h3 class="resume-category">
+            <i class="fa fa-bars-progress" aria-hidden="true"></i> Technical Skills
+          </h3>
+          <div class="skills-grid" id="skillsGrid">
+
+            <div class="skill-item">
+              <div class="skill-label">
+                <span>HP Data Protector</span><span>90%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-fill" data-width="90" role="progressbar"
+                     aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div>
+
+            <div class="skill-item">
+              <div class="skill-label">
+                <span>Linux &amp; Windows Server</span><span>85%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-fill" data-width="85"></div>
+              </div>
+            </div>
+
+            <div class="skill-item">
+              <div class="skill-label">
+                <span>HPE Primera / MSA Storage</span><span>85%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-fill" data-width="85"></div>
+              </div>
+            </div>
+
+            <div class="skill-item">
+              <div class="skill-label">
+                <span>Cisco SAN / Zoning</span><span>80%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-fill" data-width="80"></div>
+              </div>
+            </div>
+
+            <div class="skill-item">
+              <div class="skill-label">
+                <span>Python</span><span>75%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-fill" data-width="75"></div>
+              </div>
+            </div>
+
+            <div class="skill-item">
+              <div class="skill-label">
+                <span>Java</span><span>70%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-fill" data-width="70"></div>
+              </div>
+            </div>
+
+            <div class="skill-item">
+              <div class="skill-label">
+                <span>Docker &amp; Git</span><span>70%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-fill" data-width="70"></div>
+              </div>
+            </div>
+
+            <div class="skill-item">
+              <div class="skill-label">
+                <span>AWS (Cloud Basics)</span><span>55%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-fill" data-width="55"></div>
+              </div>
+            </div>
+
+          </div><!-- /skills-grid -->
+        </div><!-- /Skills block -->
+
+      </section><!-- /resume -->
+
+      <!-- ═══════════════ PORTFOLIO ═══════════════ -->
+      <section class="tab-panel" id="portfolio" role="tabpanel" aria-label="Portfolio">
+
+        <div class="section-header">
+          <h2>Portfolio</h2>
+          <span class="accent-line"></span>
+        </div>
+
+        <!-- Filter buttons -->
+        <div class="filter-bar" role="group" aria-label="Filter projects">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="infra">Infrastructure</button>
+          <button class="filter-btn" data-filter="ml">ML / AI</button>
+          <button class="filter-btn" data-filter="python">Python</button>
+        </div>
+
+        <div class="projects-grid" id="projectsGrid">
+
+          <!-- ── Project 1: UIIC (infra) — confidential ── -->
+          <div class="project-card" data-category="infra">
+            <div class="project-thumb" onclick="toggleCard(this)" role="button"
+                 tabindex="0" aria-label="Expand project details">
+              <i class="fa fa-database project-icon" aria-hidden="true"></i>
+              <span class="expand-hint"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
+            </div>
+            <div class="project-info">
+              <div class="project-top"
+                   onclick="toggleCard(this.closest('.project-card').querySelector('.project-thumb'))">
+                <div class="project-tag-row">
+                  <span class="project-tag">HP Data Protector · HPE Primera · SAN</span>
+                  <span class="badge-featured">⭐ Featured</span>
+                </div>
+                <h4>Enterprise Backup &amp; Storage – UIIC Data Center</h4>
+              </div>
+              <div class="project-body">
+                <p>End-to-end backup &amp; storage administration for United India Insurance Company's
+                   production data center, Airoli, Navi Mumbai. Includes SAN zoning, LUN provisioning,
+                   RCA, and OEM coordination with HPE &amp; OpenText.</p>
+                <ul class="proj-details">
+                  <li>HP Data Protector Cell Manager on Linux &amp; Windows servers</li>
+                  <li>HPE Primera A650 &amp; MSA 2050 — CPG, LUN &amp; hostset management</li>
+                  <li>Cisco SAN zoning, zonesets, HBA &amp; fabric path troubleshooting</li>
+                  <li>Tape library expansion, firmware upgrades, hardware replacement</li>
+                </ul>
+                <div class="project-period">
+                  <i class="fa fa-calendar-days" aria-hidden="true"></i> Sep 2024 – Present
+                </div>
+                <div class="project-actions">
+                  <span class="proj-badge">
+                    <i class="fa fa-building-lock" aria-hidden="true"></i> Enterprise / Confidential
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── Project 2: MIRA (ml) — featured ── -->
+          <div class="project-card" data-category="ml">
+            <div class="project-thumb" onclick="toggleCard(this)" role="button" tabindex="0">
+              <i class="fa fa-heart-pulse project-icon" aria-hidden="true"></i>
+              <span class="expand-hint"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
+            </div>
+            <div class="project-info">
+              <div class="project-top"
+                   onclick="toggleCard(this.closest('.project-card').querySelector('.project-thumb'))">
+                <div class="project-tag-row">
+                  <span class="project-tag">Python · Flask · React · ML · Docker</span>
+                  <span class="badge-featured">⭐ Featured</span>
+                </div>
+                <h4>MIRA — Medical Intelligence &amp; Risk Assessment</h4>
+              </div>
+              <div class="project-body">
+                <p>Full-stack health risk assessment web app with Flask REST API, React frontend,
+                   and a trained ML model that predicts patient risk from a structured intake form.
+                   Features JWT-secured admin console and Docker deployment.</p>
+                <ul class="proj-details">
+                  <li>ML model trained via <code style="background:rgba(44,92,136,.2);padding:.1rem .3rem;border-radius:4px;font-size:.72rem">train_model.py</code> — served through Flask API</li>
+                  <li>React frontend with patient intake form &amp; admin dashboard</li>
+                  <li>JWT authentication for secure admin access</li>
+                  <li>Docker + docker-compose for one-command local deployment</li>
+                  <li>Cloud-ready: Render blueprint for free hosting</li>
+                </ul>
+                <div class="project-period">
+                  <i class="fa fa-calendar-days" aria-hidden="true"></i> May 2026 – Jun 2026
+                </div>
+                <div class="project-actions">
+                  <a href="YOUR_GITHUB_LINK_MIRA" target="_blank" rel="noopener" class="proj-btn github-btn">
+                    <i class="fab fa-github" aria-hidden="true"></i> View on GitHub
+                  </a>
+                  <span class="proj-btn demo-btn">
+                    <i class="fa fa-play" aria-hidden="true"></i> Live Demo
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── Project 3: AI Assistant (python) ── -->
+          <div class="project-card" data-category="python">
+            <div class="project-thumb" onclick="toggleCard(this)" role="button" tabindex="0">
+              <i class="fa fa-robot project-icon" aria-hidden="true"></i>
+              <span class="expand-hint"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
+            </div>
+            <div class="project-info">
+              <div class="project-top"
+                   onclick="toggleCard(this.closest('.project-card').querySelector('.project-thumb'))">
+                <div class="project-tag-row">
+                  <span class="project-tag">Python · OpenAI · Voice</span>
+                </div>
+                <h4>AI-Powered Personal Assistant</h4>
+              </div>
+              <div class="project-body">
+                <p>ChatGPT-powered voice assistant supporting hands-free web search, program control,
+                   system shutdown, and offline response saving — built for Windows with full
+                   voice-command integration.</p>
+                <div class="project-period">
+                  <i class="fa fa-calendar-days" aria-hidden="true"></i> Jun 2024 – Jul 2024
+                </div>
+                <div class="project-actions">
+                  <a href="YOUR_GITHUB_LINK_ASSISTANT" target="_blank" rel="noopener" class="proj-btn github-btn">
+                    <i class="fab fa-github" aria-hidden="true"></i> View on GitHub
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── Project 4: Facial Recognition (python) ── -->
+          <div class="project-card" data-category="python">
+            <div class="project-thumb" onclick="toggleCard(this)" role="button" tabindex="0">
+              <i class="fa fa-camera project-icon" aria-hidden="true"></i>
+              <span class="expand-hint"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
+            </div>
+            <div class="project-info">
+              <div class="project-top"
+                   onclick="toggleCard(this.closest('.project-card').querySelector('.project-thumb'))">
+                <div class="project-tag-row">
+                  <span class="project-tag">Python · OpenCV · Firebase</span>
+                </div>
+                <h4>Facial Recognition Attendance System</h4>
+              </div>
+              <div class="project-body">
+                <p>Automated attendance tracking using OpenCV facial recognition algorithms.
+                   Firebase backend for secure data storage and real-time sync.
+                   Clean user interface for seamless interaction.</p>
+                <div class="project-period">
+                  <i class="fa fa-calendar-days" aria-hidden="true"></i> Jan 2024 – Mar 2024
+                </div>
+                <div class="project-actions">
+                  <a href="YOUR_GITHUB_LINK_ATTENDANCE" target="_blank" rel="noopener" class="proj-btn github-btn">
+                    <i class="fab fa-github" aria-hidden="true"></i> View on GitHub
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── Project 5: Voice Email (python) ── -->
+          <div class="project-card" data-category="python">
+            <div class="project-thumb" onclick="toggleCard(this)" role="button" tabindex="0">
+              <i class="fa fa-microphone project-icon" aria-hidden="true"></i>
+              <span class="expand-hint"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
+            </div>
+            <div class="project-info">
+              <div class="project-top"
+                   onclick="toggleCard(this.closest('.project-card').querySelector('.project-thumb'))">
+                <div class="project-tag-row">
+                  <span class="project-tag">Python · PySide6 · MySQL</span>
+                </div>
+                <h4>Voice-Based Email System for the Visually Impaired</h4>
+              </div>
+              <div class="project-body">
+                <p>Accessibility-first email client using voice commands, Haar cascade facial
+                   recognition for login, and MySQL backend — enabling visually impaired users
+                   to communicate digitally without a visual interface.</p>
+                <div class="project-period">
+                  <i class="fa fa-calendar-days" aria-hidden="true"></i> Sep 2023 – Mar 2024
+                </div>
+                <div class="project-actions">
+                  <a href="YOUR_GITHUB_LINK_VOICE_EMAIL" target="_blank" rel="noopener" class="proj-btn github-btn">
+                    <i class="fab fa-github" aria-hidden="true"></i> View on GitHub
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /projects-grid -->
+      </section><!-- /portfolio -->
+
+      <!-- ═══════════════ CONTACT ═══════════════ -->
+      <section class="tab-panel" id="contact" role="tabpanel" aria-label="Contact">
+
+        <div class="section-header">
+          <h2>Contact</h2>
+          <span class="accent-line"></span>
+        </div>
+
+        <!-- Google Maps embed — Airoli, Navi Mumbai -->
+        <div class="map-container">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15076.8!2d72.9987!3d19.1597!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c0af9b9b8c1f%3A0x46b5f9b9b9b9b9b9!2sAiroli%2C%20Navi%20Mumbai%2C%20Maharashtra%20400708!5e0!3m2!1sen!2sin!4v1700000000000"
+            width="100%" height="220"
+            style="border:0;border-radius:10px;display:block"
+            allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Airoli, Navi Mumbai location map">
+          </iframe>
+        </div>
+
+        <!-- Quick contact buttons -->
+        <div class="quick-contact">
+          <a href="mailto:work.tushardhere@gmail.com" class="qc-btn email-qc">
+            <i class="fa fa-envelope" aria-hidden="true"></i> Email Me
+          </a>
+          <a href="https://wa.me/917261965093" target="_blank" rel="noopener" class="qc-btn whatsapp-qc">
+            <i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp
+          </a>
+          <a href="https://linkedin.com/in/tushar-dhere" target="_blank" rel="noopener" class="qc-btn linkedin-qc">
+            <i class="fab fa-linkedin-in" aria-hidden="true"></i> LinkedIn
+          </a>
+        </div>
+
+        <h3 class="sub-heading">Send a Message</h3>
+
+        <div class="contact-form-wrap">
+          <form class="contact-form" id="contactForm" onsubmit="sendEmail(event)" novalidate>
+
+            <div class="form-row">
+              <div class="field-wrap">
+                <input type="text" id="from_name" name="from_name"
+                       placeholder="Your Full Name" autocomplete="name">
+                <div class="field-error" id="err_name" role="alert">
+                  Please enter your name.
+                </div>
+              </div>
+              <div class="field-wrap">
+                <input type="email" id="from_email" name="from_email"
+                       placeholder="Your Email Address" autocomplete="email">
+                <div class="field-error" id="err_email" role="alert">
+                  Please enter a valid email address.
+                </div>
+              </div>
+            </div>
+
+            <div class="field-wrap">
+              <input type="text" id="subject" name="subject" placeholder="Subject">
+              <div class="field-error" id="err_subject" role="alert">
+                Please enter a subject.
+              </div>
+            </div>
+
+            <div class="field-wrap">
+              <textarea id="message" name="message"
+                        placeholder="Your message…" rows="5"></textarea>
+              <div class="field-error" id="err_message" role="alert">
+                Please write a message (at least 10 characters).
+              </div>
+            </div>
+
+            <div class="form-footer">
+              <button type="submit" class="send-btn" id="sendBtn">
+                <div class="spinner" aria-hidden="true"></div>
+                <i class="fa fa-paper-plane btn-icon" aria-hidden="true"></i>
+                <span>Send Message</span>
+              </button>
+            </div>
+
+          </form>
+        </div><!-- /contact-form-wrap -->
+
+        <!-- Result toasts -->
+        <div id="form-success" class="form-toast success hidden" role="alert" aria-live="polite">
+          <i class="fa fa-circle-check" aria-hidden="true"></i>
+          Message sent! I'll get back to you soon.
+        </div>
+        <div id="form-error" class="form-toast error hidden" role="alert" aria-live="polite">
+          <i class="fa fa-circle-exclamation" aria-hidden="true"></i>
+          Something went wrong. Please try WhatsApp or email directly.
+        </div>
+
+      </section><!-- /contact -->
+
+    </main><!-- /main-content -->
+  </div><!-- /layout -->
+
+  <!-- Back to top -->
+  <button id="back-to-top" aria-label="Back to top">
+    <i class="fa fa-chevron-up" aria-hidden="true"></i>
+  </button>
+
+  <!-- Portfolio JS — defer keeps it non-render-blocking -->
+  <script src="app.js" defer></script>
+
+</body>
+</html>
